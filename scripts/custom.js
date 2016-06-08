@@ -5,8 +5,8 @@ $(document).ready(function(){
   $(".form-overlay").hide();
   $(".dropdown-toggle").dropdown();
 
-  $("#dateRange").daterangepicker();
-  // $("#form-circumstances").show();
+  //$("#dateRange").daterangepicker();
+   $("#form-circumstances").show();
     /* **VALUES***************************** */
 
 // homePage-overlay
