@@ -1,4 +1,77 @@
-var firebaseRef = new Firebase("https://maptester.firebaseio.com/");
+var firebaseRef = new Firebase("https://mapmain.firebaseio.com/");
+ 
+ var userGender ;
+
+  var userAge ;
+
+  var attackerGender ;
+
+  var attackedBy ;
+
+  var attackerRelationship ;
+ 
+  var date ;
+ 
+  var multipleAssaults ;
+
+  var schoolCampus ;
+
+  var reported ;
+  
+  var userLocation = "";
+  
+  var userComment = "";
+  
+  var attackerComment = "";
+  
+  var circumstancesComment = "";
+  
+   var circumstances2Comment = "";
+   
+   var lastComment = "";
+   
+   var attackLocation; 
+  
+function getReverseGeocodingData() {
+    var latlng = userLocation;
+    // This is making the Geocode request
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+        if (status !== google.maps.GeocoderStatus.OK) {
+            alert(status);
+        }
+        // This is checking to see if the Geoeode Status is OK before proceeding
+        if (status == google.maps.GeocoderStatus.OK) {
+            //console.log(results);
+            attackLocation = (results[5].formatted_address);
+        }
+    });
+}
+  
+/* SEND OBJECT TO FIREBASE */
+  var post = function(){
+  //firebase.push({
+    firebaseRef.push({
+        location: userLocation,
+        attack_location: attackLocation, 
+        user_gender: userGender,
+        user_age: userAge,
+          user_page_comment: userComment,
+        attacker_gender: attackerGender,
+        num_of_attackers: attackedBy,
+        attacker_relationship: attackerRelationship,
+          attacker_page_comment: attackerComment,
+        time_period: date,
+        multiple_assaults: multipleAssaults,
+          circumstances_page_comment: circumstancesComment,
+        school_campus: schoolCampus,
+        reported: reported,
+          circumstances_page2_comment: circumstances2Comment,
+          last_page_comment: lastComment
+      }) //firebaseRef.push
+  } //post function()
+  
+
 
 /* SEARCH BOX + MAP*/
  function initAutocomplete() {
@@ -70,7 +143,7 @@ var firebaseRef = new Firebase("https://maptester.firebaseio.com/");
   // SEND TO FIREBASE
       $("#pinDrop-window > #fireBase-yes").on("click", function(e){
         userLocation = {lat: place.geometry.location.lat(), lng: place.geometry.location.lng()};
-
+        getReverseGeocodingData();
         $("#pinDrop-window").hide();
         $("#homePage-Elements").fadeOut("fast");
         $("#pac-input").fadeOut("fast");
@@ -102,7 +175,7 @@ var firebaseRef = new Firebase("https://maptester.firebaseio.com/");
  //ADD PINDROP OVERLAY 
       $("#pinDrop-window > #fireBase-yes").on("click", function(){
        userLocation = {lat: e.latLng.lat(), lng: e.latLng.lng()};
-
+       getReverseGeocodingData();
         $("#pinDrop-window").hide();
         $("#homePage-Elements").fadeOut("fast");
         $("#pac-input").fadeOut("fast");
@@ -118,7 +191,6 @@ var firebaseRef = new Firebase("https://maptester.firebaseio.com/");
     }); //map.addListener
 
 var infoWindow = new google.maps.InfoWindow();
-
 
 
 //DROP A MARKER WHEN MAP IS CLICKED 
@@ -149,7 +221,7 @@ console.log(infoWindow);
        eventObject.user_age +' , '+ eventObject.time_period + ' , '+ 
        eventObject.num_of_attackers + ' , ' + eventObject.attacker_gender + 
       ' , ' + eventObject.attacker_relationship + ' , ' + 
-      eventObject.school_campus + ' , ' + eventObject.reported +
+      eventObject.school_campus + ' , ' + eventObject.reported + ',' + eventObject.user_address +
         '</p>'+
       '</div>'
       );
@@ -159,3 +231,4 @@ console.log(infoWindow);
 
   }); //firebase.on function
 } //initAutocomplete()
+

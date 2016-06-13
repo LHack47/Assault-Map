@@ -6,7 +6,7 @@ $(document).ready(function(){
   $(".dropdown-toggle").dropdown();
 
   //$("#dateRange").daterangepicker();
-   $("#form-circumstances").show();
+   //$("#form-circumstances").show();
     /* **VALUES***************************** */
 
 // homePage-overlay
