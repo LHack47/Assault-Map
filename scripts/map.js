@@ -37,6 +37,32 @@ function getReverseGeocodingData() {
       element.fadeOut("fast");
     };
 
+var userObject = {};
+/* SEND OBJECT TO FIREBASE */
+  function post(){
+    firebaseRef.push(userObject);//firebaseRef.push
+    userObject = {};
+     document.getElementById("resetForm").reset();
+  } //function post()
+
+    function geocodeThis(){
+      var geocoder = new google.maps.Geocoder;
+      var latLng = userObject.userLocation;
+        geocoder.geocode({'location': latLng}, function(results, status) {
+          if (status === google.maps.GeocoderStatus.OK) {
+              userObject.address = results[0].formatted_address;
+            } else {
+              console.log('No results found');
+          }
+        });
+      }; //geocodeThis()
+
+      function fadeThisIn(element){
+      element.fadeIn("fast");
+    };
+    function fadeThisOut(element){
+      element.fadeOut("fast");
+    };
 /* SEARCH BOX + MAP*/
  function initAutocomplete() {
     var map = new google.maps.Map(document.getElementById('googleMap'), {
@@ -46,20 +72,21 @@ function getReverseGeocodingData() {
           mapTypeControl: true,
           mapTypeControlOptions: {
             style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-            position: google.maps.ControlPosition.LEFT_BOTTOM
+            position: google.maps.ControlPosition.RIGHT_BOTTOM
            },
           zoomControl: true,
           zoomControlOptions: {
-            position: google.maps.ControlPosition.RIGHT_BOTTOM
+            position: google.maps.ControlPosition.RIGHT_CENTER
           },
            streetViewControl: false
     }); //styles
-    
+
     // Create the search box and link it to the UI element.
     var input = document.getElementById('pac-input');
     var searchBox = new google.maps.places.SearchBox(input);
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
   // Bias the SearchBox results towards current map's viewport.
+   var questionWindow = new google.maps.InfoWindow;
     map.addListener('bounds_changed', function() {
       searchBox.setBounds(map.getBounds());
     });
@@ -87,23 +114,21 @@ function getReverseGeocodingData() {
           bounds.extend(place.geometry.location);
         }
 
-        //Question-window open
-         var questionString = "<div id='pinDrop-window'>" +
-        "<h3>Report a sexual assault at this location?</h3>"+
-        "<button type='button' class='btn btn-default btn-clicked' id='fireBase-no'>No</button>"+
-        "<button type='button' class='btn btn-default btn-clicked' id='fireBase-yes'>Yes</button>" +
-        "</div>";
-     
-        var questionWindow = new google.maps.InfoWindow({
-          content: questionString
-        }); 
-        
+        //question-window open
+      questionWindow.setContent( "<div id='pinDrop-window'>" +
+      "<h3>Report a sexual assault at this location?</h3>"+
+     "<button type='button' class='btn btn-default btn-clicked' id='fireBase-no'>No</button>"+
+      "<button type='button' class='btn btn-default btn-clicked' id='fireBase-yes'>Yes</button>" +
+      "</div>"); // #pinDrop-window 
         questionWindow.open(map, marker);
-        infoWindow.close();
-        // Store user information and continue to form
+        if(infoWindow.open()){
+          infoWindow.close();
+        }
+        $(".gm-style-iw").next("div").hide();
+  // SEND TO FIREBASE
       $("#pinDrop-window > #fireBase-yes").on("click", function(e){
-        formObject.userLocation = {lat: place.geometry.location.lat(), lng: place.geometry.location.lng()};
-        getReverseGeocodingData();
+        userObject.userLocation = {lat: place.geometry.location.lat(), lng: place.geometry.location.lng()};
+        geocodeThis();
         fadeThisOut($("#pinDrop-window"));
         fadeThisIn($("#form-start-overlay"));
         questionWindow.close();
@@ -117,31 +142,31 @@ function getReverseGeocodingData() {
     map.fitBounds(bounds);
     }); //searchBox.addListener
 
-
-// Add marker on user click
+     // Add marker on user click
   map.addListener('click', function(e) {
     var marker = new google.maps.Marker({
     position: {lat: e.latLng.lat(), lng: e.latLng.lng()},
     map: map
     }); // var marker
-    
-    //question window opens
-    var questionString = "<div id='pinDrop-window'>" +
-    "<h3>Report a sexual assault at this location?</h3>"+
-    "<button type='button' class='btn btn-default btn-clicked' id='fireBase-no'>No</button>"+
-    "<button type='button' class='btn btn-default btn-clicked' id='fireBase-yes'>Yes</button>" +
-    "</div>";
-     
-     var questionWindow = new google.maps.InfoWindow({
-    content: questionString
-      }); 
-      questionWindow.open(map, marker);
-      infoWindow.close();
 
+     //info box when you click map
+    questionWindow.setContent( 
+      "<div id='pinDrop-window'>" +
+      "<h3>Report a sexual assault at this location?  </h3>"+
+      "<button type='button' class='btn btn-default btn-clicked' id='fireBase-no'>No</button>"+
+      "<button type='button' class='btn btn-default btn-clicked' id='fireBase-yes'>Yes</button>" +
+      "</div>"); // #pinDrop-window 
+
+   //Call by:: questionWindow.open(map, marker);
+      questionWindow.open(map, marker);
+        if(infoWindow.open()){
+          infoWindow.close();
+        }
+      $(".gm-style-iw").next("div").hide();
  //ADD PINDROP OVERLAY 
       $("#pinDrop-window > #fireBase-yes").on("click", function(){
-       formObject.userLocation = {lat: e.latLng.lat(), lng: e.latLng.lng()};
-       getReverseGeocodingData();
+       userObject.userLocation = {lat: e.latLng.lat(), lng: e.latLng.lng()};
+       geocodeThis();
         fadeThisOut($("#pinDrop-window"));
         fadeThisIn($("#form-start-overlay"));
         questionWindow.close();
@@ -159,18 +184,13 @@ var infoWindow = new google.maps.InfoWindow();
   firebaseRef.on("child_added", function(snapshot, prevChildKey) {
     // Get latitude and longitude from the cloud.
     var eventObject = snapshot.val();
-    
     // Create a google.maps.LatLng object for the position of the marker.
     var latLng = new google.maps.LatLng(eventObject.userLocation.lat, eventObject.userLocation.lng);
-
     // Place a marker at that location.
     var marker = new google.maps.Marker({
       position: latLng,
-      map: map,
-      //title: eventObject.user_gender
+      map: map
     });
-
-
   //info box when you click a pin
 // TODO: TAKE OUT CALL BACK FUNCTION AND PUT INSIDE A CLICK HANDLER FUNCTION!
     google.maps.event.addListener(marker, 'click', function() {
@@ -179,16 +199,23 @@ var infoWindow = new google.maps.InfoWindow();
        '<div id="infoContent">'+
        '<h3>' + ' ' +
        '</h3>' +
-       '<p>'+ eventObject.userGender + ' , '+ 
-       eventObject.userAge +' , '+ eventObject.date + ' , '+ 
-       eventObject.attackedBy + ' , ' + eventObject.attackerGender + 
-      ' , ' + eventObject.attackerRelationship + ' , ' + 
-      eventObject.schoolCampus + ' , ' + eventObject.reported + ',' + eventObject.attackLocation +
-        '</p>'+
-      '</div>'
+       '<p><strong>'+ eventObject.address + "</strong> <br>" + 
+       eventObject.userGender + ' <br> '+ 
+       eventObject.userAge +' <br> '+ 
+      +' <br> '+
+       eventObject.dateStart + '-'+ eventObject.dateEnd + "<br>" + 
+       eventObject.attackedBy + ' <br> ' + eventObject.attackerGender + 
+      '<br>' + 
+      eventObject.attackerRelationship + ' <br> ' + userObject.dateStart + '<br>' + eventObject.dateEnd + '<br>' + eventObject.circumstancesComment + ' <br> ' +
+      eventObject.schoolCampus + ' <br> ' + eventObject.reported + '<br>' +
+    
+        '</p></div>'
       );
       infoWindow.open(map, marker);
-      //questionWindow.close();
+        if(questionWindow.open()){
+          questionWindow.close();
+          marker.setVisible(false);
+        }
     }); // addListender(marker)
   }); //firebase.on function
 } //initAutocomplete()

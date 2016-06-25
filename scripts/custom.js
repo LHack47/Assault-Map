@@ -7,7 +7,6 @@ $(document).ready(function(){
 
 /* HAMBURGER OVERLAY   HAMBURGER OVERLAY */
   $(".glyphicon-menu-hamburger").on("click", function(){
-    // fadeThisOut($("#homePage-Elements"));
     fadeThisIn($("#hamburger-overlay"));
   });
 
@@ -60,9 +59,9 @@ $(document).ready(function(){
   $(".userInfo-controls > .glyphicon-floppy-saved").on("click", function(){
     fadeThisOut($("#form-userInfo"));
     fadeThisIn($("#form-ThankYou"));
-    formObject.userGender = $("#userGender option:selected").val();
-     formObject.userAge = $("#userAge option:selected").val();
-     formObject.userComment = $("#user-comment-box").val();
+    userObject.userGender = $("#userGender option:selected").val();
+     userObject.userAge = $("#userAge option:selected").val();
+     userObject.userComment = $("#user-comment-box").val();
   });  
 
   $(".userInfo-controls > .glyphicon-comment").on("click", function(){
@@ -78,9 +77,9 @@ $(document).ready(function(){
   $(".userInfo-controls > .glyphicon-arrow-right").on("click", function(){
     fadeThisOut($("#form-userInfo"));
     fadeThisIn($("#form-attackerInfo"));
-    formObject.userGender = $("#userGender option:selected").val();
-     formObject.userAge = $("#userAge option:selected").val();
-     formObject.userComment = $("#user-comment-box").val();
+    userObject.userGender = $("#userGender option:selected").val();
+     userObject.userAge = $("#userAge option:selected").val();
+     userObject.userComment = $("#user-comment-box").val();
   });
 
 /* ATTACKER INFO GLYPHICONS CONTROL BUTTONS ************************************************************************************** */  
@@ -92,10 +91,10 @@ $(document).ready(function(){
   $(".attackerInfo-controls > .glyphicon-floppy-saved").on("click", function(){
     fadeThisOut($("#form-attackerInfo"));
     fadeThisIn($("#form-thankYou"));
-      formObject.attackerGender = $("#attackerGender option:selected").val();
-      formObject.attackedBy = $("#attackedBy option:selected").val();
-      formObject.attackerRelationship = $("#attackerRelationship option:selected").val();
-      formObject.attackerComment = $("#attacker-comment-box").val();
+      userObject.attackerGender = $("#attackerGender option:selected").val();
+      userObject.attackedBy = $("#attackedBy option:selected").val();
+      userObject.attackerRelationship = $("#attackerRelationship option:selected").val();
+      userObject.attackerComment = $("#attacker-comment-box").val();
   }); 
 
   $(".attackerInfo-controls > .glyphicon-comment").on("click", function(){
@@ -111,10 +110,10 @@ $(document).ready(function(){
   $(".attackerInfo-controls > .glyphicon-arrow-right").on("click", function(){
     fadeThisOut($("#form-attackerInfo"));
     fadeThisIn($("#form-circumstances"));
-      formObject.attackerGender = $("#attackerGender option:selected").val();
-      formObject.attackedBy = $("#attackedBy option:selected").val();
-      formObject.attackerRelationship = $("#attackerRelationship option:selected").val();
-      formObject.attackerComment = $("#attacker-comment-box").val();
+      userObject.attackerGender = $("#attackerGender option:selected").val();
+      userObject.attackedBy = $("#attackedBy option:selected").val();
+      userObject.attackerRelationship = $("#attackerRelationship option:selected").val();
+      userObject.attackerComment = $("#attacker-comment-box").val();
   });
   /* CIRCUMSTANCES GLYPHICON CONTROL BUTTONS
   ************************************************************************************** */
@@ -126,9 +125,10 @@ $(document).ready(function(){
   $(".circumstances-controls > .glyphicon-floppy-saved").on("click", function(){
     fadeThisOut($("#form-circumstances"));
     fadeThisIn($("#form-thankYou"));
-    formObject.date = document.getElementById("dateRange").value;
-    formObject.multipleAssaults = $("#multipleAssaults option:selected").val();
-    formObject.circumstancesComment = $("#circumstances-comment-box").val();
+    userObject.multipleAssaults = $("#multipleAssaults option:selected").val();
+    userObject.dateStart = $("#dateStart").val();
+    userObject.dateEnd = $("#dateEnd").val();
+    userObject.circumstancesComment = $("#circumstances-comment-box").val();
   }); 
 
   $(".circumstances-controls > .glyphicon-comment").on("click", function(){
@@ -145,9 +145,10 @@ $(document).ready(function(){
   $(".circumstances-controls > .glyphicon-arrow-right").on("click", function(){
     fadeThisOut($("#form-circumstances"));
     fadeThisIn($("#form-circumstances-2"));
-    formObject.date = document.getElementById("dateRange").value;
-    formObject.multipleAssaults = $("#multipleAssaults option:selected").val();
-    formObject.circumstancesComment = $("#circumstances-comment-box").val();
+    userObject.multipleAssaults = $("#multipleAssaults option:selected").val();
+    userObject.dateStart = $("#dateStart").val();
+    userObject.dateEnd = $("#dateEnd").val();
+    userObject.circumstancesComment = $("#circumstances-comment-box").val();
   });
 
 /* FORM-CIRCUMSTANCES-2 GLYPHICON BUTTONS ******************************************** */
@@ -159,8 +160,9 @@ $(document).ready(function(){
   $(".circumstances-2-controls > .glyphicon-floppy-saved").on("click", function(){
     fadeThisOut($("#form-circumstances-2"));
     fadeThisIn($("#form-ThankYou"));
-     formObject.schoolCampus = $("#schoolCampus option:selected").val();
-     formObject.reported = $("#reported option:selected").val();
+    userObject.circumstances2Comment = $("#circumstances2-comment-box").val();    
+     userObject.schoolCampus = $("#schoolCampus option:selected").val();
+     userObject.reported = $("#reported option:selected").val();
   }); 
 
   $(".circumstances-2-controls > .glyphicon-comment").on("click", function(){
@@ -170,15 +172,15 @@ $(document).ready(function(){
       });
       $("#circumstances2-comments > .comment-buttons > #comment-save").on("click", function(){
         fadeThisOut($("#circumstances2-comments"));
-        formObject.circumstances2Comment = $("#circumstances2-comment-box").val();
       });
    });
 
   $(".circumstances-2-controls > .glyphicon-arrow-right").on("click", function(){
     fadeThisOut($("#form-circumstances-2"));
     fadeThisIn($("#form-end"));
-     formObject.schoolCampus = $("#schoolCampus option:selected").val();
-     formObject.reported = $("#reported option:selected").val();
+    userObject.circumstances2Comment = $("#circumstances2-comment-box").val();
+     userObject.schoolCampus = $("#schoolCampus option:selected").val();
+     userObject.reported = $("#reported option:selected").val();
   });
 
 /* FORM END PAGE ********************************************************************* */
@@ -187,9 +189,9 @@ $(document).ready(function(){
       $("#last-comment > .comment-buttons > #comment-exit").on("click", function(){
         fadeThisOut($("#last-comment"));
       });
-       $("#last-comment > .comment-buttons > #comment-save").on("click", function(){
-        fadeThisOut($("#last-comment"));
-        formObject.lastComment = $("#last-comment-box").val();
+       $("#last-comments > .comment-buttons > #comment-save").on("click", function(){
+        fadeThisOut($("#last-comments"));
+        userObject.lastComments = $("#last-comment-box").val();
       });
    });  
 
