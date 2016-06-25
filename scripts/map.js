@@ -1,39 +1,12 @@
+//Firebase link
 var firebaseRef = new Firebase("https://mapmain.firebaseio.com/");
- 
- var userGender ;
 
-  var userAge ;
+//Creating object to store user data 
+var formObject = {};  
 
-  var attackerGender ;
-
-  var attackedBy ;
-
-  var attackerRelationship ;
- 
-  var date ;
- 
-  var multipleAssaults ;
-
-  var schoolCampus ;
-
-  var reported ;
-  
-  var userLocation = "";
-  
-  var userComment = "";
-  
-  var attackerComment = "";
-  
-  var circumstancesComment = "";
-  
-   var circumstances2Comment = "";
-   
-   var lastComment = "";
-   
-   var attackLocation; 
-  
+ //Helper function for reverse geocoding
 function getReverseGeocodingData() {
-    var latlng = userLocation;
+    var latlng = formObject.userLocation;
     // This is making the Geocode request
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode({ 'latLng': latlng }, function (results, status) {
@@ -43,35 +16,26 @@ function getReverseGeocodingData() {
         // This is checking to see if the Geoeode Status is OK before proceeding
         if (status == google.maps.GeocoderStatus.OK) {
             //console.log(results);
-            attackLocation = (results[5].formatted_address);
+            formObject.attackLocation = (results[0].formatted_address);
         }
-    });
+      });
 }
   
 /* SEND OBJECT TO FIREBASE */
   var post = function(){
-  //firebase.push({
-    firebaseRef.push({
-        location: userLocation,
-        attack_location: attackLocation, 
-        user_gender: userGender,
-        user_age: userAge,
-          user_page_comment: userComment,
-        attacker_gender: attackerGender,
-        num_of_attackers: attackedBy,
-        attacker_relationship: attackerRelationship,
-          attacker_page_comment: attackerComment,
-        time_period: date,
-        multiple_assaults: multipleAssaults,
-          circumstances_page_comment: circumstancesComment,
-        school_campus: schoolCampus,
-        reported: reported,
-          circumstances_page2_comment: circumstances2Comment,
-          last_page_comment: lastComment
-      }) //firebaseRef.push
+    firebaseRef.push(formObject);
+    //reset object
+    formObject = {};
+    document.getElementById("myForm").reset();
   } //post function()
   
-
+ //Helper Functions to Fade In DOM elements
+ function fadeThisIn(element){
+      element.fadeIn("fast");
+    };
+ function fadeThisOut(element){
+      element.fadeOut("fast");
+    };
 
 /* SEARCH BOX + MAP*/
  function initAutocomplete() {
@@ -90,19 +54,7 @@ function getReverseGeocodingData() {
           },
            streetViewControl: false
     }); //styles
-
-
-  //info box when you click map
-  var questionString = "<div id='pinDrop-window'>" +
-    "<h3>Report a sexual assault at this location?</h3>"+
-    "<button type='button' class='btn btn-default btn-clicked' id='fireBase-no'>No</button>"+
-    "<button type='button' class='btn btn-default btn-clicked' id='fireBase-yes'>Yes</button>" +
-    "</div>"; // #pinDrop-window 
-
-  var questionWindow = new google.maps.InfoWindow({
-    content: questionString
-  }); //Call by:: questionWindow.open(map, marker);
-
+    
     // Create the search box and link it to the UI element.
     var input = document.getElementById('pac-input');
     var searchBox = new google.maps.places.SearchBox(input);
@@ -111,8 +63,7 @@ function getReverseGeocodingData() {
     map.addListener('bounds_changed', function() {
       searchBox.setBounds(map.getBounds());
     });
-    // Listen for the event fired when the user selects a prediction and retrieve
-    // more details for that place.
+    // Listen for the event fired when the user selects a prediction and retrieve more details for that place.
     searchBox.addListener('places_changed', function() {
       var places = searchBox.getPlaces();
 
@@ -127,7 +78,6 @@ function getReverseGeocodingData() {
         var marker = new google.maps.Marker({
           position: place.geometry.location,
           map: map,
-          fillColor: "green"
         });
 
         if (place.geometry.viewport) {
@@ -137,61 +87,73 @@ function getReverseGeocodingData() {
           bounds.extend(place.geometry.location);
         }
 
-        //question-window open
+        //Question-window open
+         var questionString = "<div id='pinDrop-window'>" +
+        "<h3>Report a sexual assault at this location?</h3>"+
+        "<button type='button' class='btn btn-default btn-clicked' id='fireBase-no'>No</button>"+
+        "<button type='button' class='btn btn-default btn-clicked' id='fireBase-yes'>Yes</button>" +
+        "</div>";
+     
+        var questionWindow = new google.maps.InfoWindow({
+          content: questionString
+        }); 
+        
         questionWindow.open(map, marker);
         infoWindow.close();
-  // SEND TO FIREBASE
+        // Store user information and continue to form
       $("#pinDrop-window > #fireBase-yes").on("click", function(e){
-        userLocation = {lat: place.geometry.location.lat(), lng: place.geometry.location.lng()};
+        formObject.userLocation = {lat: place.geometry.location.lat(), lng: place.geometry.location.lng()};
         getReverseGeocodingData();
-        $("#pinDrop-window").hide();
-        $("#homePage-Elements").fadeOut("fast");
-        $("#pac-input").fadeOut("fast");
-        $("#homePage-overlay-bar").fadeOut("fast");
-        $("#form-start-overlay").fadeIn("fast");
+        fadeThisOut($("#pinDrop-window"));
+        fadeThisIn($("#form-start-overlay"));
         questionWindow.close();
       });
       $("#pinDrop-window > #fireBase-no").on("click", function(){
         questionWindow.close();
-        //REMOVE MARKER WHEN USER SELECTS NO
+        //REMOVE MARKER IF USER SELECTS NO
         marker.setVisible(false);
       });
     }); //place.forEach
     map.fitBounds(bounds);
-      // console.log(bounds);
     }); //searchBox.addListener
 
 
-
-     // Add marker on user click
+// Add marker on user click
   map.addListener('click', function(e) {
     var marker = new google.maps.Marker({
     position: {lat: e.latLng.lat(), lng: e.latLng.lng()},
     map: map
     }); // var marker
+    
+    //question window opens
+    var questionString = "<div id='pinDrop-window'>" +
+    "<h3>Report a sexual assault at this location?</h3>"+
+    "<button type='button' class='btn btn-default btn-clicked' id='fireBase-no'>No</button>"+
+    "<button type='button' class='btn btn-default btn-clicked' id='fireBase-yes'>Yes</button>" +
+    "</div>";
+     
+     var questionWindow = new google.maps.InfoWindow({
+    content: questionString
+      }); 
       questionWindow.open(map, marker);
       infoWindow.close();
 
  //ADD PINDROP OVERLAY 
       $("#pinDrop-window > #fireBase-yes").on("click", function(){
-       userLocation = {lat: e.latLng.lat(), lng: e.latLng.lng()};
+       formObject.userLocation = {lat: e.latLng.lat(), lng: e.latLng.lng()};
        getReverseGeocodingData();
-        $("#pinDrop-window").hide();
-        $("#homePage-Elements").fadeOut("fast");
-        $("#pac-input").fadeOut("fast");
-        $("#homePage-overlay-bar").fadeOut("fast");
-        $("#form-start-overlay").fadeIn("fast");
+        fadeThisOut($("#pinDrop-window"));
+        fadeThisIn($("#form-start-overlay"));
         questionWindow.close();
       });
       $("#pinDrop-window > #fireBase-no").on("click", function(){
         questionWindow.close();
-        //REMOVE MARKER WHEN USER SELECTS NO!!
         marker.setVisible(false);
       });
     }); //map.addListener
 
-var infoWindow = new google.maps.InfoWindow();
 
+var infoWindow = new google.maps.InfoWindow();
 
 //DROP A MARKER WHEN MAP IS CLICKED 
   firebaseRef.on("child_added", function(snapshot, prevChildKey) {
@@ -199,36 +161,35 @@ var infoWindow = new google.maps.InfoWindow();
     var eventObject = snapshot.val();
     
     // Create a google.maps.LatLng object for the position of the marker.
-    var latLng = new google.maps.LatLng(eventObject.location.lat, eventObject.location.lng);
+    var latLng = new google.maps.LatLng(eventObject.userLocation.lat, eventObject.userLocation.lng);
 
     // Place a marker at that location.
     var marker = new google.maps.Marker({
       position: latLng,
       map: map,
-      title: eventObject.user_gender
+      //title: eventObject.user_gender
     });
 
+
   //info box when you click a pin
-console.log(infoWindow);
 // TODO: TAKE OUT CALL BACK FUNCTION AND PUT INSIDE A CLICK HANDLER FUNCTION!
     google.maps.event.addListener(marker, 'click', function() {
       // infoWindow.close();
       infoWindow.setContent(
        '<div id="infoContent">'+
-       '<h3>' + 
+       '<h3>' + ' ' +
        '</h3>' +
-       '<p>'+ eventObject.user_gender + ' , '+ 
-       eventObject.user_age +' , '+ eventObject.time_period + ' , '+ 
-       eventObject.num_of_attackers + ' , ' + eventObject.attacker_gender + 
-      ' , ' + eventObject.attacker_relationship + ' , ' + 
-      eventObject.school_campus + ' , ' + eventObject.reported + ',' + eventObject.user_address +
+       '<p>'+ eventObject.userGender + ' , '+ 
+       eventObject.userAge +' , '+ eventObject.date + ' , '+ 
+       eventObject.attackedBy + ' , ' + eventObject.attackerGender + 
+      ' , ' + eventObject.attackerRelationship + ' , ' + 
+      eventObject.schoolCampus + ' , ' + eventObject.reported + ',' + eventObject.attackLocation +
         '</p>'+
       '</div>'
       );
       infoWindow.open(map, marker);
-      questionWindow.close();
+      //questionWindow.close();
     }); // addListender(marker)
-
   }); //firebase.on function
 } //initAutocomplete()
 

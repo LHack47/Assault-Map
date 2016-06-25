@@ -72,7 +72,7 @@ body{
 
 #homePage-overlay-bar {
 	width: 100vw;
-	height: 64px;
+	height: 30px;
 	position: absolute;
 	z-index: 6;
 	bottom: 0;
@@ -85,7 +85,7 @@ body{
 	position: absolute;
 	top: 0;
 	z-index: 21;
-	background-color: rgba(0, 0, 0, 0.85);
+	background-color: black;
 	display: flex;
    	align-items: center;
    	justify-content: center;
@@ -184,7 +184,7 @@ body{
 .form-overlay {
 	width: 100vw;
 	height: 100vh;
-	background-color: rgba(0, 0, 0, 0.85);
+	background-color: black;
 	padding: 10px 10px;
 	position: absolute;
 	top: 0;
@@ -212,7 +212,6 @@ body{
 }
 
 #form-guidance {
-	background-color: black;
 	text-align: center;
 }
 
@@ -288,29 +287,29 @@ body{
 	font-size: 100%;
 }
 
-#form-end {
-	z-index: 19;
+.form-comments {
+	z-index: 22;
 }
+
+textarea {
+	margin: 0% auto;
+	width: 300px;
+	font-size: 100%;
+}
+
+.comment-buttons {
+	position: absolute;
+	bottom: 3%;
+	left: 10%;
+}
+
+/*#form-end {
+	z-index: 19;
+}*/
 
 #form-thankYou {
 	display: flex;
    	align-items: center;
    	justify-content: center;
    	flex-direction: column;
-}
-
-#form-comments {
-	background-color: black;
-	z-index: 22;
-}
-
-#comments {
-	margin: 0% auto;
-	width: 300px;
-	font-size: 100%;
-}
-.comment-buttons {
-	position: absolute;
-	bottom: 3%;
-	left: 10%;
 }

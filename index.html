@@ -66,7 +66,6 @@
 
 	  <div id="homePage-overlay-bar">
         <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
-        <p id="annieCannons">This site was built by <a href="http//wwww.AnnieCannons.com">AnnieCannons</a></p>
       </div> <!-- #homePage-overlay-bar -->
 	</div> <!-- .container -->
 
@@ -75,7 +74,8 @@
 		<a href="#"><h2>Resources</h2></a>
 	</div> <!-- #hamburger-overlay -->
 
-
+<!--START OF FORM-->
+<form id="myForm">
 	<div class="form-overlay" id="form-start-overlay">
 		<p id="">Would you like to tell us more about the circumstances?</p>
 		<br>
@@ -103,7 +103,7 @@
 		<br>
 		<p>What is your gender?</p>
     <div class="selectDiv">
-      <select class="btn-default" id="userGender">
+      <select class="btn-default resetDropDowns" id="userGender">
         <option value="selectOne">Select one...</option>
         <option value="female">Female</option>
         <option value="male">Male</option>
@@ -116,7 +116,7 @@
 		<br>
 		<p>When it happened, I was:</p>
     <div class="selectDiv">
-      <select class="btn-default" id="userAge">
+      <select class="btn-default resetDropDowns" id="userAge">
         <option value="selectOne">Select one...</option>
         <option value="0-5">0-5</option>
         <option value="6-10">6-10</option>
@@ -138,6 +138,20 @@
 		</div> <!-- .btn-group-controls -->
 	</div> <!-- #form-userInfo -->
 
+  <!-- User Comment Box Page -->
+	<div class="form-overlay form-comments" id="user-comments">
+		<h3>Additional details </h3>
+		<br>
+		<div class="form-group">
+  			<label for="comment">Comment:</label>
+  			<textarea class="form-control" rows="8" id="user-comment-box"></textarea>
+		</div> <!-- .form-group -->
+		<div class="btn-group btn-group-lg comment-buttons" role="group" aria-label="...">
+  			<button type="button" class="btn btn-default" id="comment-exit">Exit Comment</button>
+ 			  <button type="button" class="btn btn-default" id="comment-save">Save Comment</button>
+  		</div> <!-- .btn-group-lg -->
+	</div> <!-- #form-comments -->
+
 <!--***ATTACKER ************************* -->
 <!--************************************* -->
   <div class="form-overlay" id="form-attackerInfo">
@@ -145,7 +159,7 @@
 		<br>
 		<p>What was the attacker's gender?</p>
     <div class="selectDiv">
-      <select class="btn-default" id="attackerGender">
+      <select class="btn-default resetDropDowns" id="attackerGender">
         <option value="selectOne">Select one...</option>
         <option value="female">Female</option>
         <option value="male">Male</option>
@@ -157,7 +171,7 @@
 		<br>
 		<p>I was attacked by:</p>
     <div class="selectDiv">
-      <select class="btn-default" id="attackedBy">
+      <select class="btn-default resetDropDowns" id="attackedBy">
         <option value="selectOne">Select one...</option>
         <option value="oneAttacker">1 Attacker</option>
         <option value="multipleAttackers">1+ Attackers</option>
@@ -166,7 +180,7 @@
   	<br>
 		<p>How would you describe your relationship with your attacker(s)?</p>
     <div class="selectDiv">
-      <select class="btn-default" id="attackerRelationship">
+      <select class="btn-default resetDropDowns" id="attackerRelationship">
         <option value="selectOne">Select one...</option>
         <option value="stranger">A Stranger</option>
         <option value="aquaintance">A Acquaintance</option>
@@ -185,6 +199,20 @@
 		</div> <!-- .btn-group-controls -->
 	</div> <!-- #form-attackerInfo -->
 
+  <!-- Attacker Comment Box Page -->
+	<div class="form-overlay form-comments" id="attacker-comments">
+		<h3>Additional details </h3>
+		<br>
+		<div class="form-group">
+  			<label for="comment">Comment:</label>
+  			<textarea class="form-control" rows="8" id="attacker-comment-box"></textarea>
+		</div> <!-- .form-group -->
+		<div class="btn-group btn-group-lg comment-buttons" role="group" aria-label="...">
+  			<button type="button" class="btn btn-default" id="comment-exit">Exit Comment</button>
+ 			  <button type="button" class="btn btn-default" id="comment-save">Save Comment</button>
+  		</div> <!-- .btn-group-lg -->
+	</div> <!-- #form-comments -->
+
 <!--***CIRCUMSTANCES ******************** -->
 <!--************************************* -->
 	<div class="form-overlay" id="form-circumstances">
@@ -200,7 +228,7 @@
 	<br>
   <p>Did you experience more than one assault at this place in this period of time?</p>
   <div class="selectDiv">
-    <select class="btn-default" id="multipleAssaults">
+    <select class="btn-default resetDropDowns" id="multipleAssaults">
       <option value="selectOne">Select one...</option>
       <option value="yes">Yes</option>
       <option value="no">No</option>
@@ -215,6 +243,20 @@
 		</div> <!-- .btn-group-controls -->
   </div> <!-- #form-circumstances -->
 
+  <!-- Circumstances Comment Box Page -->
+	<div class="form-overlay form-comments" id="circumstances-comments">
+		<h3>Additional details </h3>
+		<br>
+		<div class="form-group">
+  			<label for="comment">Comment:</label>
+  			<textarea class="form-control" rows="8" id="circumstances-comment-box"></textarea>
+		</div> <!-- .form-group -->
+		<div class="btn-group btn-group-lg comment-buttons" role="group" aria-label="...">
+  			<button type="button" class="btn btn-default" id="comment-exit">Exit Comment</button>
+ 			  <button type="button" class="btn btn-default" id="comment-save" >Save Comment</button>
+  		</div> <!-- .btn-group-lg -->
+	</div> <!-- #form-comments -->
+
 <!--***CIRCUMSTANCES 2 ****************** -->
 <!--************************************* -->
   <div class="form-overlay" id="form-circumstances-2">
@@ -222,7 +264,7 @@
     <br>
     <p>Were you on a school campus? </p>
     <div class="selectDiv">
-      <select class="btn-default" id="schoolCampus">
+      <select class="btn-default resetDropDowns" id="schoolCampus">
         <option value="selectOne">Select one...</option>
         <option value="yes">Yes</option>
         <option value="no">No</option>
@@ -231,7 +273,7 @@
     <br>
     <p>Did you report this? (Most don't)</p>
     <div class="selectDiv">
-      <select class="btn-default" id="reported">
+      <select class="btn-default resetDropDowns" id="reported">
         <option value="selectOne">Select one...</option>
         <option value="yes, to police">Yes, to law enforcement</option>
         <option value="yes, campus cops">Yes, to campus cops</option>
@@ -249,21 +291,21 @@
     </div> <!-- .btn-group-controls -->
   </div> <!-- #form-circumstances-2 -->
 
-<!-- Form Pg5 -->
-
-<!-- Comment Box's Page -->
-	<div class="form-overlay" id="form-comments">
+  <!-- Circumstances2 Comment Box Page -->
+	<div class="form-overlay form-comments" id="circumstances2-comments">
 		<h3>Additional details </h3>
 		<br>
 		<div class="form-group">
   			<label for="comment">Comment:</label>
-  			<textarea class="form-control" rows="8" id="comments"></textarea>
+  			<textarea class="form-control" rows="8" id="circumstances2-comment-box"></textarea>
 		</div> <!-- .form-group -->
 		<div class="btn-group btn-group-lg comment-buttons" role="group" aria-label="...">
   			<button type="button" class="btn btn-default" id="comment-exit">Exit Comment</button>
- 			  <button type="button" class="btn btn-default" id="comment-save" onClick="document.getElementById('comments').val='';">Save Comment</button>
+ 			  <button type="button" class="btn btn-default" id="comment-save" >Save Comment</button>
   		</div> <!-- .btn-group-lg -->
 	</div> <!-- #form-comments -->
+
+<!--FORM END -->
 
 	<div class="form-overlay" id="form-end">
 		<h3>Would you like to comment with more details about the assault you’re reporting - or add your email to a comment if you’d like to get updates about this event or this map?</h3>
@@ -283,7 +325,23 @@
     </div> <!-- .form-end-controls -->
 	</div> <!-- #form-end -->
 <!-- Form end pg-->
+</form>
+
+<!-- Last Page Comment Box Page -->
+	<div class="form-overlay form-comments" id="last-comment">
+		<h3>Additional details </h3>
+		<br>
+		<div class="form-group">
+  			<label for="comment">Comment:</label>
+  			<textarea class="form-control" rows="8" id="last-comment-box"></textarea>
+		</div> <!-- .form-group -->
+		<div class="btn-group btn-group-lg comment-buttons" role="group" aria-label="...">
+  			<button type="button" class="btn btn-default" id="comment-exit">Exit Comment</button>
+ 			  <button type="button" class="btn btn-default" id="comment-save">Save Comment</button>
+  		</div> <!-- .btn-group-lg -->
+	</div> <!-- #form-comments -->
 	
+  <!--Thank you-->
 		<div class="form-overlay" id="form-thankYou">
 				<h3>Thank you!</h3>
 				<p>Your report will help us build a database that truly represents how sexual assault is perpetrated - and warn others of dangerous areas and circumstances. <br> <br> Click anywhere to view all reports.</p>
