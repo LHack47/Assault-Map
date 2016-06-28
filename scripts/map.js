@@ -1,12 +1,9 @@
 //Firebase link
 var firebaseRef = new Firebase("https://mapmain.firebaseio.com/");
 
-//Creating object to store user data 
-var formObject = {};  
-
  //Helper function for reverse geocoding
 function getReverseGeocodingData() {
-    var latlng = formObject.userLocation;
+    var latlng = userObject.userLocation;
     // This is making the Geocode request
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode({ 'latLng': latlng }, function (results, status) {
@@ -16,17 +13,17 @@ function getReverseGeocodingData() {
         // This is checking to see if the Geoeode Status is OK before proceeding
         if (status == google.maps.GeocoderStatus.OK) {
             //console.log(results);
-            formObject.attackLocation = (results[0].formatted_address);
+            userObject.attackLocation = (results[0].formatted_address);
         }
       });
 }
   
 /* SEND OBJECT TO FIREBASE */
   var post = function(){
-    firebaseRef.push(formObject);
+    firebaseRef.push(userObject);
     //reset object
-    formObject = {};
-    document.getElementById("myForm").reset();
+    userObject = {};
+    document.getElementById("resetForm").reset();
   } //post function()
   
  //Helper Functions to Fade In DOM elements
@@ -39,11 +36,7 @@ function getReverseGeocodingData() {
 
 var userObject = {};
 /* SEND OBJECT TO FIREBASE */
-  function post(){
-    firebaseRef.push(userObject);//firebaseRef.push
-    userObject = {};
-     document.getElementById("resetForm").reset();
-  } //function post()
+
 
     function geocodeThis(){
       var geocoder = new google.maps.Geocoder;
@@ -124,6 +117,7 @@ var userObject = {};
         if(infoWindow.open()){
           infoWindow.close();
         }
+        //To hide the X in the info marker
         $(".gm-style-iw").next("div").hide();
   // SEND TO FIREBASE
       $("#pinDrop-window > #fireBase-yes").on("click", function(e){
@@ -199,15 +193,14 @@ var infoWindow = new google.maps.InfoWindow();
        '<div id="infoContent">'+
        '<h3>' + ' ' +
        '</h3>' +
-       '<p><strong>'+ eventObject.address + "</strong> <br>" + 
-       eventObject.userGender + ' <br> '+ 
-       eventObject.userAge +' <br> '+ 
-      +' <br> '+
-       eventObject.dateStart + '-'+ eventObject.dateEnd + "<br>" + 
-       eventObject.attackedBy + ' <br> ' + eventObject.attackerGender + 
-      '<br>' + 
-      eventObject.attackerRelationship + ' <br> ' + userObject.dateStart + '<br>' + eventObject.dateEnd + '<br>' + eventObject.circumstancesComment + ' <br> ' +
-      eventObject.schoolCampus + ' <br> ' + eventObject.reported + '<br>' +
+       '<p><strong> Location of event: </strong>'+ eventObject.address + "<br> <strong>Gender of Survivor: </strong>" + 
+       eventObject.userGender + ' <br> <strong> Age of Survivor </strong>' + 
+       eventObject.userAge +' <br> <strong> Event Date/Range: </strong>'+
+       eventObject.dateStart + '-'+ eventObject.dateEnd + "<br> <strong> Number of Attackers: </strong>'" + 
+       eventObject.attackedBy + ' <br> <strong> Gender of Attacker: </strong>' + eventObject.attackerGender + 
+      '<br> <strong> Survivor Relationship to Attacker: </strong>' + 
+      eventObject.attackerRelationship + ' <br> <strong> On a School Campus: </strong>' +
+      eventObject.schoolCampus + ' <br> <strong>Assault Reported:</strong>' + eventObject.reported + '<br>' +
     
         '</p></div>'
       );

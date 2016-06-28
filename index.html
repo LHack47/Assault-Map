@@ -108,12 +108,14 @@
 
     <div class="selectDiv">
       <select class="btn-default resetDropDowns" id="userGender">
-        <option value="unKnown">Select one...</option>
+        <option value="unreported">Select one...</option>
         <option value="female">Female</option>
         <option value="male">Male</option>
         <option value="trans Female">Transgender Female</option>
         <option value="trans Male">Transgender Male</option>
         <option value="It's complicated">It's more complicated</option>
+				<option value="Don't Know'">Don't Know</option>
+				<option value="Decline to state">Decline to state</option>
       </select>
     </div> <!-- .selectDiv -->
 		<br>
@@ -121,7 +123,7 @@
 		<p>When it happened, I was:</p>
     <div class="selectDiv">
       <select class="btn-default resetDropDowns" id="userAge">
-        <option value="unKnown">Select one...</option>
+        <option value="unreported">Select one...</option>
         <option value="0-5">0-5</option>
         <option value="6-10">6-10</option>
         <option value="11-15">11-15</option>
@@ -132,6 +134,8 @@
         <option value="35-44">35-44</option>
         <option value="45-54">45-54</option>
         <option value="55+">55+</option>
+				<option value="Don't Know'">Don't Know</option>
+				<option value="Decline to state">Decline to state</option>
       </select>
     </div> <!-- .selectDiv -->
 		<div class="btn-group-controls userInfo-controls" role="group">
@@ -164,35 +168,41 @@
 		<p>What was the attacker's gender?</p>
     <div class="selectDiv">
       <select class="btn-default resetDropDowns" id="attackerGender">
-        <option value="selectOne">Select one...</option>
+        <option value="unreported">Select one...</option>
         <option value="female">Female</option>
         <option value="male">Male</option>
         <option value="trans Female">Transgender Female</option>
         <option value="trans Male">Transgender Male</option>
         <option value="It's complicated">It's more complicated</option>
+				<option value="Don't Know'">Don't Know</option>
+				<option value="Decline to state">Decline to state</option>
       </select>
     </div> <!-- .selectDiv -->
 		<br>
-		<p>I was attacked by:</p>
+		<p>I was attacked by more than one person:</p>
     <div class="selectDiv">
       <select class="btn-default resetDropDowns" id="attackedBy">
-        <option value="selectOne">Select one...</option>
-        <option value="oneAttacker">1 Attacker</option>
-        <option value="multipleAttackers">1+ Attackers</option>
+        <option value="unreported">Select one...</option>
+        <option value="oneAttacker">Yes</option>
+        <option value="multipleAttackers">No</option>
+				<option value="Don't Know'">Don't Know</option>
+				<option value="Decline to state">Decline to state</option>
       </select>
     </div> <!-- .selectDiv -->
   	<br>
 		<p>How would you describe your relationship with your attacker(s)?</p>
     <div class="selectDiv">
       <select class="btn-default resetDropDowns" id="attackerRelationship">
-        <option value="selectOne">Select one...</option>
+        <option value="unreported">Select one...</option>
         <option value="stranger">A Stranger</option>
-        <option value="aquaintance">A Acquaintance</option>
+        <option value="aquaintance">An Acquaintance</option>
         <option value="friend">A Friend</option>
         <option value="coworker">A Coworker</option>
         <option value="family Member">A Family Member</option>
         <option value="partner">A Partner/Spouse</option>
-        <option value="police">A police Officer</option>
+        <option value="police">A Police Officer</option>
+				<option value="Don't Know'">Don't Know</option>
+				<option value="Decline to state">Decline to state</option>
       </select>
     </div> <!-- .selectDiv -->
     <div class="btn-group-controls attackerInfo-controls" role="group">
@@ -232,9 +242,11 @@
   <p>Did you experience more than one assault at this place in this period of time?</p>
   <div class="selectDiv">
     <select class="btn-default resetDropDowns" id="multipleAssaults">
-      <option value="selectOne">Select one...</option>
+      <option value="unreported">Select one...</option>
       <option value="yes">Yes</option>
       <option value="no">No</option>
+			<option value="Don't Know'">Don't Know</option>
+			<option value="Decline to state">Decline to state</option>
     </select>
   </div> <!-- .selectDiv -->
   
@@ -268,20 +280,24 @@
     <p>Were you on a school campus? </p>
     <div class="selectDiv">
       <select class="btn-default resetDropDowns" id="schoolCampus">
-        <option value="selectOne">Select one...</option>
+        <option value="unreported">Select one...</option>
         <option value="yes">Yes</option>
         <option value="no">No</option>
+				<option value="Don't Know'">Don't Know</option>
+				<option value="Decline to state">Decline to state</option>
       </select>
     </div> <!-- .selectDiv -->
     <br>
     <p>Did you report this? (Most don't)</p>
     <div class="selectDiv">
       <select class="btn-default resetDropDowns" id="reported">
-        <option value="selectOne">Select one...</option>
+        <option value="unreported">Select one...</option>
         <option value="yes, to police">Yes, to law enforcement</option>
         <option value="yes, campus cops">Yes, to campus cops</option>
-        <option value="someone else">To someone else</option>
+        <option value="someone else">Yes, to someone else</option>
 				<option value="No">No</option>
+				<option value="Don't Know'">Don't Know</option>
+				<option value="Decline to state">Decline to state</option>
       </select>
     </div> <!-- .selectDiv -->
 

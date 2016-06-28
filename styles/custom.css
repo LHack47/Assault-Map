@@ -242,14 +242,26 @@ body{
 	position: relative;
 }
 
-.btn-group-controls {
-	width: 98%;
-	position: absolute;
+.btn-group-controls {	
+	width:98%;
+	position:absolute;
 	left: 1.5%;
 	bottom: 5%;
 	text-align: center;
-	word-spacing: 40px;
+	word-spacing: 40px;	
 }
+
+/*@media screen and (max-width: 450px) {
+	.btn-group-controls {
+		width:100%;
+		position: absolute;
+		left: 5px;
+	}
+	
+	.glyphicon {
+		font-size: 20px;
+	}
+}*/
 
 .btn-group-controls span {
 	color: white;
