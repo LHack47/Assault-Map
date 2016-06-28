@@ -191,18 +191,26 @@ var infoWindow = new google.maps.InfoWindow();
       // infoWindow.close();
       infoWindow.setContent(
        '<div id="infoContent">'+
-       '<h3>' + ' ' +
-       '</h3>' +
-       '<p><strong> Location of event: </strong>'+ eventObject.address + "<br> <strong>Gender of Survivor: </strong>" + 
-       eventObject.userGender + ' <br> <strong> Age of Survivor </strong>' + 
-       eventObject.userAge +' <br> <strong> Event Date/Range: </strong>'+
-       eventObject.dateStart + '-'+ eventObject.dateEnd + "<br> <strong> Number of Attackers: </strong>'" + 
-       eventObject.attackedBy + ' <br> <strong> Gender of Attacker: </strong>' + eventObject.attackerGender + 
-      '<br> <strong> Survivor Relationship to Attacker: </strong>' + 
-      eventObject.attackerRelationship + ' <br> <strong> On a School Campus: </strong>' +
-      eventObject.schoolCampus + ' <br> <strong>Assault Reported:</strong>' + eventObject.reported + '<br>' +
-    
-        '</p></div>'
+       '<p><strong>Assault Location: </strong> <br>'+ eventObject.address + '<br>' + 
+       '<strong>Survivor Gender: </strong>' +
+       eventObject.userGender + ' <br> '+ 
+       '<strong>Age upon assault: </strong>' +
+       eventObject.userAge +'<br>'+ 
+       '<strong>Attacker Gender: </strong>' +
+       eventObject.attackerGender +'<br>'+
+       '<strong>Multiple attackers?: </strong>' +
+       eventObject.attackedBy + ' <br> ' + 
+       '<strong>The attacker was a(n): </strong>' +
+       eventObject.attackerRelationship + ' <br> ' + 
+       '<strong>Multiple assaults here?: </strong>' +
+       eventObject.multipleAssaults + '<br>' +
+       '<strong>Date range: </strong>' + '<br>' +
+       eventObject.dateStart + ' -- '+ eventObject.dateEnd + "<br>" + 
+       '<strong>On a school campus: </strong>' +
+       eventObject.schoolCampus + ' <br> ' + 
+       '<strong>reported to: </strong>' +
+       eventObject.reported + '<br>' +
+       '</p></div>'
       );
       infoWindow.open(map, marker);
         if(questionWindow.open()){
