@@ -55,13 +55,12 @@
     <div id="transparent-overlay">
    </div>
    <div id="homePage-overlay">
-     <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-		 <h3>Mission:</h3>
-		 <p> Create a database of anonymous sexual assault reports that improve understanding and help warn others. </p>
-			
-		 <h3>How it works:</h3>
-		 <p>Type in or click on a location to add your report.</p>
-		 <button type="button" class="btn btn-default" id="addEvent">Add Report</button>
+     		<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+		 		<h3>Mission:</h3>
+				 <p> Create a database of anonymous sexual assault reports that improve understanding and help warn others. </p>
+		 		<h3>How it works:</h3>
+		 		<p>Type in or click on a location to add your report.</p>
+				<button type="button" class="btn btn-default" id="addEvent">Add Report</button>
 				<!-- <p>Click map to view events.</p> -->
     </div> <!-- #homePage-overlay -->
 
@@ -103,7 +102,7 @@
 <!--************************************* -->
 	<div class="form-overlay" id="form-userInfo">
 		<h3>Please Tell Us About Yourself.</h3>
-		<br>
+		
 		<p>What is your gender?</p>
 
     <div class="selectDiv">
@@ -118,7 +117,6 @@
 				<option value="Decline to state">Decline to state</option>
       </select>
     </div> <!-- .selectDiv -->
-		<br>
 		<br>
 		<p>When it happened, I was:</p>
     <div class="selectDiv">
@@ -149,7 +147,7 @@
   <!-- User Comment Box Page -->
 	<div class="form-overlay form-comments" id="user-comments">
 		<h3>Additional details </h3>
-		<br>
+		
 		<div class="form-group">
   			<label for="comment">Comment:</label>
   			<textarea class="form-control resetComments" rows="8" id="user-comment-box"></textarea>
@@ -164,7 +162,7 @@
 <!--************************************* -->
   <div class="form-overlay" id="form-attackerInfo">
 		<h3>About Your Attacker</h3>
-		<br>
+		
 		<p>What was the attacker's gender?</p>
     <div class="selectDiv">
       <select class="btn-default resetDropDowns" id="attackerGender">
@@ -216,7 +214,7 @@
   <!-- Attacker Comment Box Page -->
 	<div class="form-overlay form-comments" id="attacker-comments">
 		<h3>Additional details </h3>
-		<br>
+		
 		<div class="form-group">
   			<label for="comment">Comment:</label>
   			<textarea class="form-control resetComments" rows="8" id="attacker-comment-box"></textarea>
@@ -231,8 +229,13 @@
 <!--************************************* -->
 	<div class="form-overlay" id="form-circumstances">
 		<h3>About The Circumstances..</h3>
+<<<<<<< HEAD
     <br>
 		<p>Please indicate, to the best of your knowledge, the date range (or exact date) when this assault occurred:</p>
+=======
+    
+		<p>Please indicate the date or time period when this assault occurred:</p>
+>>>>>>> ce7049989bfb76cceb16edfde3b6c61eb04ab616
   <!-- **DATE INPUT********************** -->
   <div id="dateContainer">
     <input type="date" class="dates" id="dateStart" size="23"/>
@@ -261,7 +264,7 @@
   <!-- Circumstances Comment Box Page -->
 	<div class="form-overlay form-comments" id="circumstances-comments">
 		<h3>Additional details </h3>
-		<br>
+		
 		<div class="form-group">
   			<label for="comment">Comment:</label>
   			<textarea class="form-control resetComments" rows="8" id="circumstances-comment-box"></textarea>
@@ -276,7 +279,7 @@
 <!--************************************* -->
   <div class="form-overlay" id="form-circumstances-2">
     <h3>Just a couple more questions...</h3>
-    <br>
+    
     <p>Were you on a school campus? </p>
     <div class="selectDiv">
       <select class="btn-default resetDropDowns" id="schoolCampus">
@@ -300,7 +303,7 @@
 				<option value="Decline to state">Decline to state</option>
       </select>
     </div> <!-- .selectDiv -->
-
+		<br>
     <p id="smallText">Please add a comment to tell us more about the campus location or any enforcement response. </p>
 
     <div class="btn-group-controls circumstances-2-controls" role="group">
@@ -314,7 +317,7 @@
   <!-- Circumstances2 Comment Box Page -->
 	<div class="form-overlay form-comments" id="circumstances2-comments">
 		<h3>Additional details </h3>
-		<br>
+		
 		<div class="form-group">
   			<label for="comment">Comment:</label>
   			<textarea class="form-control resetComments" rows="8" id="circumstances2-comment-box" placeholder="e.g.(School name, name of dorm/frat/building, e.t.c)"></textarea>
@@ -328,12 +331,12 @@
 <!--FORM END -->
 
 	<div class="form-overlay" id="form-end">
-		<h3>Would you like to comment with more details about the assault you’re reporting - or add your email to a comment if you’d like to get updates about this event or this map?</h3>
+		<p>Would you like to comment with more details about the assault you’re reporting - or add your email to a comment if you’d like to get updates about this event or this map?</p>
 		<br>
 		<div class="btn-group btn-group-lg" role="group">
 		  	<button type="button" class="btn btn-default end-comment">Comment</button>
 		</div> <!-- .end-btns -->
-    <br>
+    
     <div class="btn-group btn-group-lg endGroup-btns" role="group" aria-label="...">
       <button type="button" class="btn btn-default end-restart" onClick="">Restart Without Submitting</button>
       <button type="button" class="btn btn-default end-submit" onclick="post()">Submit Report</button>
@@ -350,7 +353,7 @@
 <!-- Last Page Comment Box Page -->
 	<div class="form-overlay form-comments" id="last-comments">
 		<h3>Additional details </h3>
-		<br>
+		
 		<div class="form-group">
   			<label for="comment">Comment:</label>
   			<textarea class="form-control resetComments" rows="8" id="last-comment-box"></textarea>
